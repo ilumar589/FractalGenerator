@@ -4,9 +4,45 @@
 #include "pch.h"
 #include <iostream>
 
+#include "Bitmap.h"
+
+using namespace std;
+using namespace CaveOfProgramming;
+
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	int const WIDTH = 800;
+	int const HEIGHT = 600;
+
+	Bitmap bitmap{ WIDTH, HEIGHT };
+
+	double min{ 999999 };
+	double max{ -999999 };
+
+	for (int x = 0; x <= WIDTH; x++)
+	{
+		for (int y = 0; y <= HEIGHT; y++)
+		{
+			double xFractal{ (x - WIDTH / 2) * 2.0 / WIDTH };
+			double yFractal{ (y - HEIGHT / 2) * 2.0 / HEIGHT };
+
+			if (xFractal < min)
+			{
+				min = xFractal;
+			}
+
+			if (xFractal > max)
+			{
+				max = xFractal;
+			}
+		}
+	}
+
+	cout << min << ", " << max << endl;
+
+	bitmap.write("test.bmp");
+
+    cout << "Finished!\n"; 
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
